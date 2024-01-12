@@ -43,3 +43,8 @@ Route::get('users/get/{flag}',[UserController::class,'index']);
 Route::get('user/{id}',[UserController::class,'show']);
 
 Route::delete('user/delete/{id}',[UserController::class,'destroy']);
+
+// Route::get('users/{id?}',[UserController::class,'get']);
+
+Route::put('user/{id}', [UserController::class, 'update']);
+Route::patch('change-password/{id}', [UserController::class, 'changePassword']);
