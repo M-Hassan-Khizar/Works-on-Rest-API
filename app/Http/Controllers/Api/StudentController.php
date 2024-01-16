@@ -148,7 +148,7 @@ public function destroy($id)
 }else{
     return response()->json([
         'status'=>404,
-        'message'=>"Student updation unsusscessfully"
+        'message'=>"Student deletion unsusscessfully"
     ],404);
 
 
