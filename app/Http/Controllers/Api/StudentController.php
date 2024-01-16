@@ -32,9 +32,10 @@ class StudentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:191',
-            'email' => 'required|email|max:191',
-            'phone' => 'required|digit:11',
             'course' => 'required|string|max:191',
+            'email' => 'required|email|max:191',
+            'phone' => 'required|digits:11',
+
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -44,9 +45,10 @@ class StudentController extends Controller
         } else {
             $student = Student::create([
                 'name' => $request->name,
+                'course' => $request->course,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'course' => $request->course,
+
             ]);
             if($student){
                 return response()->json([
@@ -55,8 +57,8 @@ class StudentController extends Controller
                 ],200);
             }else{
                 return response()->json([
-                    'status'=>200,
-                    'message'=>"Student created unsusscessfully"
+                    'status'=>500,
+                    'message'=>"Something went wrong"
                 ],500);
             }
         }
@@ -67,7 +69,7 @@ class StudentController extends Controller
         if ($student) {
             return response()->json([
                 'status'=>200,
-                'message'=>"$student"
+                'message'=>$student
             ],200);
 
 
@@ -84,7 +86,7 @@ class StudentController extends Controller
         if ($student) {
             return response()->json([
                 'status'=>200,
-                'message'=>"$student"
+                'message'=>$student
             ],200);
 
 
@@ -99,9 +101,10 @@ class StudentController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:191',
-            'email' => 'required|email|max:191',
-            'phone' => 'required|digit:11',
             'course' => 'required|string|max:191',
+            'email' => 'required|email|max:191',
+            'phone' => 'required|digits:11',
+
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -109,7 +112,7 @@ class StudentController extends Controller
                 'errors' => $validator->messages()
             ], 422);
         } else {
-            $student = Student::find();
+            $student = Student::find($id);
 
             if($student){
 
@@ -127,7 +130,7 @@ class StudentController extends Controller
             }else{
                 return response()->json([
                     'status'=>404,
-                    'message'=>"Student updation unsusscessfully"
+                    'message'=>"No such studebtS"
                 ],404);
             }
         }
